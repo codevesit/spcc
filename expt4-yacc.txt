@@ -1,0 +1,126 @@
+***Recognize nested if statements and display levels :***
+
+IF.l
+%{
+#include "y.tab.h"
+#define yywrap() 1
+%}
+%%
+"if" return IF;
+[sS][0-9]* return STOP;
+"<"|">"|"=="|"<="|">="|"!=" return CONDITION;
+[0-9]+ return NUMBER;
+[a-z][a-zA-Z0-9_]* return IDENTIFIER;
+\n return NEWLINE;
+. return yytext[0];
+%%
+IF.y
+%{
+#include<stdio.h>
+int count=0;
+%}
+%token IF CONDITION STOP NUMBER IDENTIFIER NEWLINE
+%%
+statement : if_stmt NEWLINE {printf("\nNo. of nested if statements = %d\n",count);}
+if_stmt : IF'('cond')''{'if_stmt'}' {count++;}
+          |STOP
+cond : IDENTIFIER CONDITION NUMBER | NUMBER CONDITION IDENTIFIER | IDENTIFIER CONDITION IDENTIFIER
+%%
+int yyerror()
+{
+printf("\nThe statement is invalid.\n");
+}
+main()
+{
+printf("\nEnter the statement : \n");
+yyparse();
+}
+
+
+***Simple Calculator :***
+
+Cal.l
+%{
+#include<stdio.h>
+#include<math.h>
+#include "y.tab.h"
+%}
+%%
+[0-9]+ {yylval.dval=atoi(yytext); return NUMBER; }
+[\n] {return 0;}
+[ \t] {;}
+. {return yytext[0];}
+%%
+int yywrap(void)
+{        return 1;        }
+void yyerror(char *str)
+{         printf(" Error : %s",str);        }
+int main()
+{         printf("Enter Expression => ");
+ yyparse();
+ return(0);        }
+Cal.y
+%{
+#include<stdio.h>
+int yylex(void);
+%}
+%union
+{         float dval;        }
+%token <dval> NUMBER
+%left '+' '-'
+%left '*' '/'
+%nonassoc UMINUS
+%type <dval> exp
+%%
+state : exp {printf("Answer = %f",$1);}
+ ;
+exp : NUMBER
+ | exp '+' exp {$$=$1+$3;}
+ | exp '-' exp {$$=$1-$3;}
+ | exp '*' exp {$$=$1*$3;}
+ | exp '/' exp {$$=$1/$3;}
+ | '('exp')' {$$=$2;}
+ | '-' exp %prec UMINUS {$$=-$2;}
+ ;
+%%
+
+
+
+
+***Recognize a valid variable in C :***
+
+Val.l
+%{
+#include "y.tab.h"
+#define yywrap() 1
+%}
+%%
+[a-zA-Z] return ID;
+[0-9] return NUMBER;
+[_] return UNDERSCORE;
+\n return NEWLINE;
+. return yytext[0];
+%%
+
+
+Val.y
+%{
+#include<stdio.h>
+#include<stdlib.h>
+%}
+%token ID NUMBER UNDERSCORE NEWLINE 
+%%
+statement : start NEWLINE {printf("\nIt is a valid C variable.\n");exit(0);}
+start : ID next | UNDERSCORE next
+next : ID next | UNDERSCORE next | NUMBER next | NUMBER | UNDERSCORE | ID
+%%
+int yyerror()
+{
+        printf("\nInvalid C variable.\n");
+        exit(0);
+}
+main()
+{
+        printf("Enter a variable name : ");
+        yyparse();
+}

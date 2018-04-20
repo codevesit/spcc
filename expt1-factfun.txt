@@ -1,0 +1,20 @@
+factshared.c :
+#include<stdio.h>
+int fact(int f)
+{                  if(f>=1)                     return f*fact(f-1);
+                    else                            return 1;                  }
+ 
+factshared.h :
+#include<stdio.h>
+#include "factshared.c"
+extern int fact(int f);
+ 
+factmain.c :
+#include<stdio.h>
+#include "factshared.h"
+int main()
+{                  int f;
+                    printf("Enter a number = ");
+                    scanf("%d",&f);
+                    printf("Factorial = %d\n",fact(f));
+                    return 0;                  }

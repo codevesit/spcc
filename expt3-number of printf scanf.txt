@@ -1,0 +1,16 @@
+%{
+#include<stdio.h>
+int p=0, s=0;
+%}
+%%
+printf {p++;}
+scanf {s++;}
+[a-zA-Z] {}
+%%
+int main()
+{
+printf("Enter the String:");
+yylex();
+printf("no. of scanf %d\n",s);
+printf("no. of printf %d\n",p);
+return 0;}

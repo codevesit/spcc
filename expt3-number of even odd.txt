@@ -1,0 +1,14 @@
+%{
+#include<stdio.h>
+#include<stdlib.h>
+%}
+%%
+[0-9]*[02468] {printf("Even number");}
+[0-9]*[13579] {printf("Odd number");}
+-[0-9]*[02468] {printf("Even number");}
+-[0-9]*[13579] {printf("Odd number");}
+%%
+int main() {
+printf("Enter any number");
+yylex();
+}

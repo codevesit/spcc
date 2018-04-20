@@ -1,0 +1,28 @@
+%{
+#include<stdio.h>
+#include<stdlib.h>
+int v=0;
+int av=0;
+int aj=0;
+%}
+%%
+[\t]
+go(es) |
+runs |
+likes v++;
+quickly |
+slow |
+lazy |
+slowly av++;
+small aj++;
+[a-zA-Z]
+%%
+int main()
+{
+printf("Enter the String:");
+yylex();
+printf("no. of verb %d\n",v);
+printf("no. of adverb %d\n",av);
+printf("no. of adjective %d\n",aj);
+return 0;
+}

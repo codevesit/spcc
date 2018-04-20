@@ -1,0 +1,37 @@
+import java.util.Vector;
+public class DeadCode {
+        public static void main(String[] args)
+        {    int a,i=0,b,var2,c=0;
+            a=4;
+            b=0;
+            var2=0;
+            Vector v= new Vector();
+            v.add("a=2;\n");
+            v.add("b=4;\n");
+v.add("L1: var2=b;\n");
+v.add("if(var2!=0) goto L2;\ngoto L3;" );
+v.add("L2: c=a*a;\n" );
+v.add("L3: c= a/2;" );
+            System.out.println(v.get(0));
+            a=4;
+            System.out.println(v.get(1));
+            b=0;
+            System.out.println(v.get(2));
+            var2=b;
+            if ( var2!=0)
+            {    System.out.println("L2");
+                c=a*a;
+                System.out.println(c);     }
+            else
+            {    System.out.println("L3");
+                c=a/2;
+                System.out.println(c);     }
+            System.out.println("Original Code:\n");
+            for(i=0;i<v.size(); i++)
+                System.out.println(v.get(i));
+            v.removeElementAt(3);
+            v.removeElementAt(3);
+            System.out.println("Optimised Code:\n");
+        for(i=0 ;i<v.size(); i++)
+                System.out.println(v.get(i));     
+}     }      

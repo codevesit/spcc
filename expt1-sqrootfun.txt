@@ -1,0 +1,23 @@
+sqrootshared.c :
+#include<stdio.h>
+#include<math.h>
+int sqroot(int n)
+{                  int i,x=1,c=0;
+                    for(i=1;x<=n;i+=2)
+            {          x=x+i;
+                c++;               }
+                    return c;                   }
+sqrootshared.h :
+#include<stdio.h>
+#include "sqrootshared.c"
+extern int sqroot(int n);
+ 
+sqrootmain.c :
+#include<stdio.h>
+#include "sqrootshared.h"
+int main()
+{                  int b;
+                    printf("Enter a number = ");
+                    scanf("%d",&b);
+                    printf("Square root = %d\n",sqroot(b));
+                    return 0;                  }

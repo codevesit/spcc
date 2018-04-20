@@ -1,0 +1,22 @@
+powshared.c :
+#include<stdio.h>
+int power(int b,int e)
+{                  if(e>1)                      return b*power(b,e-1);                    
+                    return b;                  }
+ 
+powshared.h :
+#include<stdio.h>
+#include "powshared.c"
+extern int power(int b,int e);
+ 
+powmain.h :
+#include<stdio.h>
+#include "powshared.h"
+int main()
+{                  int b,e;
+                    printf("Enter base = ");
+                    scanf("%d",&b);
+                    printf("Enter exponent = ");
+                    scanf("%d",&e);
+                    printf("%d to the power %d = %d\n",b,e,power(b,e));
+                    return 0;                  }
