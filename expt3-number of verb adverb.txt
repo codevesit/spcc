@@ -1,28 +1,17 @@
 %{
 #include<stdio.h>
 #include<stdlib.h>
-int v=0;
-int av=0;
-int aj=0;
+int adv=0,verb=0,adj=0,noun=0;
 %}
 %%
-[\t]
-go(es) |
-runs |
-likes v++;
-quickly |
-slow |
-lazy |
-slowly av++;
-small aj++;
-[a-zA-Z]
+(he|sagar|anish|she|it)	noun++;
+(easily|quickly|lazily|loyaly)	adv++;
+(lazy|smart|beautiful)	adj++;
+(runs|is)	verb++;
 %%
 int main()
 {
-printf("Enter the String:");
-yylex();
-printf("no. of verb %d\n",v);
-printf("no. of adverb %d\n",av);
-printf("no. of adjective %d\n",aj);
-return 0;
+	printf("Enter a string\n");
+	yylex();
+	printf("Number of adverb = %d\nNumber of verbs = %d\nNumber of adjectives = %d\nNumber of noun = %d\n",adv,verb,adj,noun);
 }

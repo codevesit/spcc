@@ -18,3 +18,13 @@ int main()
                     scanf("%d",&f);
                     printf("Factorial = %d\n",fact(f));
                     return 0;                  }
+
+
+/*
+gcc -c Wall -Werror -fPIC <filename>.c
+gcc -shared -o lib<filename>.so <filename>.o
+gcc -L/home/labxyz/Desktop/expt1/ -Wall <filename>.c -o <filename> -l<filename> -lm
+export LD_LIBRARY_PATH=/home/labxyzz/Desktop/expt1/:$LD_LIBRARY_PATH
+./<filename>
+<>
+*/

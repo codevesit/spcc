@@ -9,7 +9,7 @@ powshared.h :
 #include "powshared.c"
 extern int power(int b,int e);
  
-powmain.h :
+powmain.c :
 #include<stdio.h>
 #include "powshared.h"
 int main()
