@@ -1,0 +1,20 @@
+C:\Users\student.Lab302-17\Desktop\5661>flex calculator.l
+
+C:\Users\student.Lab302-17\Desktop\5661>bison -dy calculator.y
+
+C:\Users\student.Lab302-17\Desktop\5661>gcc lex.yy.c y.tab.c -o calculator.exe
+calculator.l:19:2: warning: no newline at end of file
+
+C:\Users\student.Lab302-17\Desktop\5661>calculator.exe
+2+2-1;
+found NUMBER 2
+found factor
+found term
+found NUMBER 2
+found factor
+found exp PLUS term
+found NUMBER 1
+found factor
+found exp MINUS term
+found exp END
+The output is 3 quick mathss
